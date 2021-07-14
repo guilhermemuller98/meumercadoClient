@@ -81,19 +81,15 @@ const ProductsPage = () => {
         if (!values.id) {
           await api.post("/product", values);
         } else {
-          await api.put(`/product/${values.id}`, values, {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
+          await api.put(`/product/${values.id}`, values);
         }
 
+        setError(undefined);
         fetchProducts();
         setProductForEdit(undefined);
         alert("Produto salvo com sucesso");
       } catch (error) {
-        console.log("error", error);
-        setError(error.message);
+        setError(error.response.data.message);
       }
     }
   };
