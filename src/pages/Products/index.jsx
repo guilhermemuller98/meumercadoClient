@@ -75,7 +75,7 @@ const ProductsPage = () => {
     }
   };
 
-  const saveProduct = async (values, resetForm) => {
+  const saveProduct = async (values) => {
     if (isValidUser()) {
       try {
         if (!values.id) {
@@ -85,7 +85,7 @@ const ProductsPage = () => {
         }
 
         fetchProducts();
-        resetForm();
+        setProductForEdit(undefined);
         alert("Produto salvo com sucesso");
       } catch (error) {
         console.log("error", error);

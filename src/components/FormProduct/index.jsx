@@ -21,8 +21,8 @@ const FormProduct = ({ product, saveProduct, btnRef }) => {
         enableReinitialize={true}
         initialValues={product}
         validationSchema={EditSchema}
-        onSubmit={(values, { resetForm }) => {
-          saveProduct(values, resetForm);
+        onSubmit={(values) => {
+          saveProduct(values);
         }}
       >
         {({ handleSubmit, errors }) => (
