@@ -81,7 +81,11 @@ const ProductsPage = () => {
         if (!values.id) {
           await api.post("/product", values);
         } else {
-          await api.put(`/product/${values.id}`, values);
+          await api.put(`/product/${values.id}`, values, {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          });
         }
 
         fetchProducts();
