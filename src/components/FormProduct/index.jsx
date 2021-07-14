@@ -7,7 +7,10 @@ const EditSchema = object().shape({
   nome: string().required("Campo obrigatório"),
   codigo: string().required("Campo obrigatório"),
   tipo: string().required("Campo obrigatório"),
-  valor: number().required("Campo obrigatório").positive().min(1),
+  valor: number()
+    .required("Campo obrigatório")
+    .positive("Valor deve ser positivo")
+    .min(1),
   estoque: number().required("Campo obrigatório").positive().min(1),
 });
 

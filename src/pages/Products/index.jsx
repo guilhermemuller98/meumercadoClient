@@ -61,26 +61,44 @@ const ProductsPage = () => {
     };
   }, [search]);
 
-  const saveProduct = async (values, resetForm) => {
-    try {
-      if (!values.id) {
-        await api.post("/product", values);
-      } else {
-        await api.put(`/product/${values.id}`, values);
-      }
+  const isValidUser = () => {
+    const resultado = window.prompt("Digite sua senha");
+    if (!resultado) {
+      alert("Senha incorreta");
+      return false;
+    }
 
-      fetchProducts();
-      resetForm();
-      alert("Produto salvo com sucesso");
-    } catch (error) {
-      console.log("error", error);
-      setError(error.message);
+    if (resultado?.toString().toLocaleLowerCase() !== "admin") {
+      alert("Senha incorreta");
+    } else {
+      return true;
+    }
+  };
+
+  const saveProduct = async (values, resetForm) => {
+    if (isValidUser()) {
+      try {
+        if (!values.id) {
+          await api.post("/product", values);
+        } else {
+          await api.put(`/product/${values.id}`, values);
+        }
+
+        fetchProducts();
+        resetForm();
+        alert("Produto salvo com sucesso");
+      } catch (error) {
+        console.log("error", error);
+        setError(error.message);
+      }
     }
   };
 
   const deleteProduct = async (productId) => {
-    await api.delete(`/product/${productId}`);
-    fetchProducts();
+    if (isValidUser()) {
+      await api.delete(`/product/${productId}`);
+      fetchProducts();
+    }
   };
 
   const editProduct = (productId) => {
