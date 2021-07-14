@@ -1,5 +1,5 @@
 import { Formik, Form, Field } from "formik";
-import { object, string } from "yup";
+import { number, object, string } from "yup";
 
 import "./index.scss";
 
@@ -7,8 +7,8 @@ const EditSchema = object().shape({
   nome: string().required("Campo obrigatório"),
   codigo: string().required("Campo obrigatório"),
   tipo: string().required("Campo obrigatório"),
-  valor: string().required("Campo obrigatório"),
-  estoque: string().required("Campo obrigatório"),
+  valor: number().required("Campo obrigatório").positive().min(1),
+  estoque: number().required("Campo obrigatório").positive().min(1),
 });
 
 const FormProduct = ({ product, saveProduct, btnRef }) => {
