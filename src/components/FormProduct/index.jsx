@@ -5,7 +5,13 @@ import "./index.scss";
 
 const EditSchema = object().shape({
   nome: string().required("Campo obrigatório"),
-  codigo: string().required("Campo obrigatório"),
+  codigo: string()
+    .required("Campo obrigatório")
+    .test(
+      "Is positive?",
+      "Valor dever ser maior que zero",
+      (value) => value > 0
+    ),
   tipo: string().required("Campo obrigatório"),
   valor: number()
     .required("Campo obrigatório")
@@ -45,7 +51,7 @@ const FormProduct = ({ product, saveProduct, btnRef }) => {
                 </div>
                 <div className="field">
                   <label>Código</label>
-                  <Field type="text" name="codigo" />
+                  <Field type="number" name="codigo" />
                   {errors.codigo}
                 </div>
                 <div className="field">
