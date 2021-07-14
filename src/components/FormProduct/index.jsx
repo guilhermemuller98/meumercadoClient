@@ -6,12 +6,12 @@ import "./index.scss";
 const EditSchema = object().shape({
   nome: string().required("Campo obrigatório"),
   codigo: string()
+    .required("Campo obrigatório")
     .test(
       "Is positive?",
       "Valor dever ser maior que zero",
       (value) => value > 0
-    )
-    .required("Campo obrigatório"),
+    ),
   tipo: string().required("Campo obrigatório"),
   valor: number()
     .required("Campo obrigatório")
