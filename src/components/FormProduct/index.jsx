@@ -9,9 +9,18 @@ const EditSchema = object().shape({
   tipo: string().required("Campo obrigatório"),
   valor: number()
     .required("Campo obrigatório")
-    .positive("Valor deve ser positivo")
-    .min(1),
-  estoque: number().required("Campo obrigatório").positive().min(1),
+    .test(
+      "Is positive?",
+      "Valor dever ser maior que zero",
+      (value) => value > 0
+    ),
+  estoque: number()
+    .required("Campo obrigatório")
+    .test(
+      "Is positive?",
+      "Valor dever ser maior que zero",
+      (value) => value > 0
+    ),
 });
 
 const FormProduct = ({ product, saveProduct, btnRef }) => {
